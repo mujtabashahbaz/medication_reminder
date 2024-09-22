@@ -1,0 +1,42 @@
+<!-- HTML template for Flask (display medications) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Reminder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Medication Reminder</h2>
+
+        <!-- Form to add medication -->
+        <form action="/add" method="POST">
+            <div class="form-group">
+                <label for="name">Medication Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter medication name" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="text" class="form-control" id="time" name="time" placeholder="Enter time (e.g., 9:00 AM)" required>
+            </div>
+            <div class="form-group">
+                <label for="dosage">Dosage</label>
+                <input type="text" class="form-control" id="dosage" name="dosage" placeholder="Enter dosage (e.g., 500 mg)" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Medication</button>
+        </form>
+
+        <h3 class="mt-5">Your Medications</h3>
+        <ul class="list-group">
+            {% for medication in medications %}
+                <li class="list-group-item">
+                    {{ medication.name }} - {{ medication.time }} - {{ medication.dosage }}
+                    <a href="/delete/{{ medication.id }}" class="btn btn-danger btn-sm float-right">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
